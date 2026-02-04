@@ -222,6 +222,34 @@
       btn.style.transform =
         "translateX(" + (Math.random() * 140 - 70) + "px)";
     }
+    // 🎁 Gift logic
+function openGift(number) {
+  const modal = document.getElementById("giftModal");
+  const img = document.getElementById("giftImage");
+  const msg = document.getElementById("giftMessage");
+
+  if (number === 1) {
+    img.src = "eyes.jpg";
+    msg.innerText =
+      "In your eyes, I found my forever. Every heartbeat of mine belongs to you, Sanusha ❤️";
+  } 
+  else if (number === 2) {
+    img.src = "";
+    msg.innerText =
+      "This gift is hidden… just like the future I dream of with you 💍";
+  } 
+  else {
+    img.src = "";
+    msg.innerText =
+      "No matter where life takes us, my love will always find you 💕";
+  }
+
+  modal.style.display = "flex";
+}
+
+function closeGift() {
+  document.getElementById("giftModal").style.display = "none";
+}
   </script>
 </body>
 </html>
