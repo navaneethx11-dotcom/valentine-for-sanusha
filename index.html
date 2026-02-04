@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For You, Sanusha 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(160deg, #ff5f8a, #ff85a1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 24px;
+      text-align: center;
+      animation: fadeUp 1.2s ease;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(16px);
+      border-radius: 26px;
+      padding: 34px 22px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+      justify-content: center;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px 18px;
+      font-size: 1rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .yes {
+      background: #ff2f6e;
+      color: white;
+    }
+
+    .no {
+      background: #fff;
+      color: #ff2f6e;
+    }
+
+    /* Floating hearts & kisses */
+    .float-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .float {
+      position: absolute;
+      font-size: 26px;
+      animation: floatUp linear forwards;
+      opacity: 0.9;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh) scale(0.7);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-15vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    /* Kiss pop */
+    .kiss {
+      position: fixed;
+      font-size: 48px;
+      animation: kissPop 0.9s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes kissPop {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.4);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.8) translateY(-40px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body ontouchstart="kissTap(event)">
+  <div class="float-layer" id="floatLayer"></div>
+
+  <div class="container">
+    <div class="card" id="card">
+      <h1>Hey Sanusha 💕</h1>
+      <p>
+        From the moment you came into my life,<br />
+        everything felt warmer… softer… better.
+      </p>
+
+      <p>
+        So I made this just for you 💌
+      </p>
+
+      <h1>Will you be my Valentine? 💘</h1>
+
+      <div class="buttons">
+        <button class="yes" onclick="yesClicked()">Yes 💖</button>
+        <button class="no" onclick="noClicked()">No 🙈</button>
+      </div>
+
+      <p style="margin-top:18px;font-size:0.9rem;">
+        (Tap anywhere for a kiss 😘)
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const floatLayer = document.getElementById("floatLayer");
+
+    function createFloat(symbol) {
+      const el = document.createElement("div");
+      el.className = "float";
+      el.innerText = symbol;
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.animationDuration = Math.random() * 2 + 4 + "s";
+      floatLayer.appendChild(el);
+      setTimeout(() => el.remove(), 6000);
+    }
+
+    function startRomance() {
+      setInterval(() => {
+        const symbols = ["❤️", "💋", "💖", "😘"];
+        createFloat(symbols[Math.floor(Math.random() * symbols.length)]);
+      }, 250);
+    }
+
+    function kissTap(e) {
+      const kiss = document.createElement("div");
+      kiss.className = "kiss";
+      kiss.innerText = "💋";
+      kiss.style.left = (e.touches ? e.touches[0].clientX : e.clientX) + "px";
+      kiss.style.top = (e.touches ? e.touches[0].clientY : e.clientY) + "px";
+      document.body.appendChild(kiss);
+      setTimeout(() => kiss.remove(), 900);
+    }
+
+    function yesClicked() {
+      document.getElementById("card").innerHTML = `
+        <h1>Come here 😘💋</h1>
+        <p>
+          You just made me the happiest person alive.
+        </p>
+        <p>
+          Happy Valentine’s Day, Sanusha 💐<br />
+          I choose you. Always.
+        </p>
+        <h1>❤️ Navaneeth ❤️</h1>
+        <p style="font-size:0.9rem;">(Tap for kisses 💋)</p>
+      `;
+      startRomance();
+    }
+
+    function noClicked() {
+      const btn = document.querySelector(".no");
+      btn.innerText = "Nice try 😅";
+      btn.style.transform =
+        "translateX(" + (Math.random() * 140 - 70) + "px)";
+    }
+  </script>
+</body>
+</html>
